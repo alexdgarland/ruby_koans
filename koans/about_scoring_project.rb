@@ -29,8 +29,30 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 #
 # Your goal is to write the score method.
 
+def score_group(number, frequency)
+  if frequency >= 3
+    if number == 1
+      1000
+    else
+      number * 100
+    end + score_group(number, frequency - 3)
+  else
+    frequency * 
+      case number
+      when 1
+        100
+      when 5
+        50
+      else
+        0
+      end
+  end
+end
+
 def score(dice)
-  # You need to write this method
+  dice
+  .group_by {|i| i}
+  .inject(0) { |acc, (number, instances)| acc + score_group(number, instances.length) }
 end
 
 class AboutScoringProject < Neo::Koan
