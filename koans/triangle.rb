@@ -15,6 +15,10 @@
 #
 def triangle(a, b, c)
   case
+  when a <= 0 || b <= 0 || c <= 0
+    raise TriangleError, "Triangle cannot have sides with zero or negative lengths"
+  when a + b <= c || a + c <= b || b + c <= a
+    raise TriangleError, "The sum of lengths of any two sides of a Triangle must be more than the length of the third side"
   when a==b && b==c
     :equilateral
   when a==b || a==c || b==c
